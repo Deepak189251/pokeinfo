@@ -63,16 +63,19 @@ const App = () => {
         return json
       })
       const requiredData = await Promise.all(pokemonData)
+      console.log(requiredData)
       setPokelist(requiredData)
     }
     catch(err){
       console.log(err)
       setError(err)
     }
+    finally{
+      setLoading(false)
+    }
    // console.log(data?.results)
-    setLoading(false)
   }
-  console.log(filter)
+  //console.log(filter)
 
   const handleFilter = () => {
    const data =  pokelist?.filter((pokemon) => {
@@ -140,20 +143,26 @@ const App = () => {
   
   return (
     <>
-    {error ? <img alt='no-data' src='https://img.freepik.com/premium-vector/file-folder-mascot-character-design-vector_166742-4369.jpg?w=900' /> :
+    {error ?
+    <div className=' w-[100%] h-[100vh]'>
+      <img className=' w-[100%] h-[100%]' alt='no-data' src='https://img.freepik.com/premium-vector/file-folder-mascot-character-design-vector_166742-4369.jpg?w=900' />
+
+    </div>
     
-      <div className=' w-[1320px] mx-auto '>
+    :
+    
+      <div className=' xl:w-[1278px] lg:w-[1000px] md:w-[780px] sm:w-[500px] w-[310px] mx-auto '>
         <Header />
         <div className=' mt-[30px]'>
-          <div className=' flex justify-between w-[400px]'>
-            <div className=' border-[1px] border-gray-300 h-[35px] w-[200px] ml-[20px] rounded-sm'>
+          <div className=' flex lg:ml-[50px] md:ml-[35px] sm:ml-[20px] ml-0 md:w-[400px] sm:w-[360px] w-[280px]'>
+            <div className=' border-[1px] border-gray-300 h-[35px] sm:w-[200px] w-[160px] sm:ml-[20px] ml-[5px] rounded-sm lg:mr-[30px] ml:mr-[20px] sm:mr-[10px] mr-[5px]'>
               <input type='text' placeholder='Search pokemon' value={search} onChange={(e) => setSearch(e.target.value)} className=' my-[6px]  text-gray-500 text-sm outline-none border-none pl-[15px] font-medium placeholder:text-gray-500' />          
             </div>
 
           
-            <select className=' cursor-pointer mt-[5px] border-[1px] border-black rounded-md' onChange={(e) => setFilter(e.target.value)} >
+            <select className=' cursor-pointer w-[85px] pl-[5px] text-gray-500 font-medium text-sm pb-[2px] border-[1px] h-[35px] border-gray-300 outline-none rounded-md' onChange={(e) => setFilter(e.target.value)} >
               {filterOptions.map((option) => (
-                <option key={option.name} className=' cursor-pointer' value={option.value} >{option.name} </option>
+                <option key={option.name} className=' cursor-pointer font-medium' value={option.value} >{option.name} </option>
               ))}
             </select>
           </div>
