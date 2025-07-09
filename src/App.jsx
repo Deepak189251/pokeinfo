@@ -112,7 +112,7 @@ const App = () => {
         return pokemon.types.some((type) => type.type.name === 'flying')
       })
     }
-    else if(filter === 'poison'){;
+    else if(filter === 'poison'){
       return data?.filter((pokemon) => {
         return pokemon.types.some((type) => type.type.name === 'poison')
       })
